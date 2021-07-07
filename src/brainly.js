@@ -10,7 +10,7 @@ class BrainlyAPI {
     if (typeof config !== 'object') 
       throw new Error('Parameter must be an object')
     
-    config.server = servers[config.server.toUpperCase()] ?? this.config.server
+    config.server = servers[config.server] ?? this.config.server
 
     Object.assign(this.config, config)
   }
