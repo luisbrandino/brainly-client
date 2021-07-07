@@ -1,6 +1,6 @@
 {
   "name": "brainly-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,15 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luisbrandino/brainly-api.git"
+    "url": "git+https://github.com/luisbrandino/brainly-client.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "engines": {
+    "node": ">=14"
+  },
+  "engineStrict": true,
+  "keywords": ["brainly", "api", "client", "brainlyapi", "brainly-api", "brainly-client"],
+  "author": "luisbrandino",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/luisbrandino/brainly-api/issues"
+    "url": "https://github.com/luisbrandino/brainly-client/issues"
   },
-  "homepage": "https://github.com/luisbrandino/brainly-api#readme",
+  "homepage": "https://github.com/luisbrandino/brainly-client#readme",
   "devDependencies": {
     "jest": "^27.0.3"
   },

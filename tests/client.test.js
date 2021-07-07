@@ -2,41 +2,41 @@ const Client = require('../src/brainly')
 const servers = require('../src/servers')
 
 describe('Testing client server property', () => {
-    it('Should define the correct url based on server parameter', () => {
-        const brainly = new Client({ server: 'BR' });
-    
-        const expectedUrl = servers['BR'].url;
-    
-        expect(brainly.config.server.url).toBe(expectedUrl);
-    })
-    
-    it('Should define default url whenever server parameter is not defined', () => {
-        const brainly = new Client({});
-    
-        const expectedUrl = servers.DEFAULT.url;
-    
-        expect(brainly.config.server.url).toBe(expectedUrl);
-    })
+  it('Should define the correct url based on server parameter', () => {
+    const brainly = new Client({ server: 'BR' });
 
-    it('Should define default url whenever server parameter is null', () => {
-        const brainly = new Client();
-    
-        const expectedUrl = servers.DEFAULT.url;
-    
-        expect(brainly.config.server.url).toBe(expectedUrl);
-    })
-    
-    it('Should define default url whenever server parameter does not exist', () => {
-        const brainly = new Client({ server: 'test' });
-    
-        const expectedUrl = servers.DEFAULT.url;
-    
-        expect(brainly.config.server.url).toBe(expectedUrl);
-    })
+    const expectedUrl = servers['BR'].url;
 
-    it('Should throw an error when parameter passed is neither an object nor null', () => {
-        expect(() => new Client(5)).toThrow('Parameter must be an object')
-    })
+    expect(brainly.config.server.url).toBe(expectedUrl);
+  })
+
+  it('Should define default url whenever server parameter is not defined', () => {
+    const brainly = new Client({});
+
+    const expectedUrl = servers.DEFAULT.url;
+
+    expect(brainly.config.server.url).toBe(expectedUrl);
+  })
+
+  it('Should define default url whenever server parameter is null', () => {
+    const brainly = new Client();
+
+    const expectedUrl = servers.DEFAULT.url;
+
+    expect(brainly.config.server.url).toBe(expectedUrl);
+  })
+
+  it('Should define default url whenever server parameter does not exist', () => {
+    const brainly = new Client({ server: 'test' });
+
+    const expectedUrl = servers.DEFAULT.url;
+
+    expect(brainly.config.server.url).toBe(expectedUrl);
+  })
+
+  it('Should throw an error when parameter passed is neither an object nor null', () => {
+    expect(() => new Client(5)).toThrow('Parameter must be an object')
+  })
 })
 
 describe('Testing method search', () => {

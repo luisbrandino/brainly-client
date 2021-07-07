@@ -7,10 +7,6 @@ module.exports = {
     url: 'https://brainly.ro',
     api: '/graphql/ro'
   },
-  'US': {
-    url: 'https://brainly.com',
-    api: '/graphql/us'
-  },
   'HI': {
     url: 'https://brainly.in',
     api: '/graphql/hi'
