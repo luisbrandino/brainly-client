@@ -1,5 +1,5 @@
 const servers = require('./servers')
-const { DEFAULT_QUESTIONS_PER_REQUEST, MAX_QUESTIONS_PER_REQUEST } = require('./constants')
+const { DEFAULT_QUESTIONS_PER_REQUEST, MAX_QUESTIONS_PER_REQUEST, MIN_QUESTIONS_PER_REQUEST } = require('./constants')
 
 class BrainlyAPI {
   config = {
@@ -7,9 +7,9 @@ class BrainlyAPI {
   }
 
   constructor(config = {}) {
-    if (typeof config !== 'object') 
+    if (typeof config !== 'object')
       throw new Error('Parameter must be an object')
-    
+
     config.server = servers[config.server] ?? this.config.server
 
     Object.assign(this.config, config)
@@ -24,8 +24,13 @@ class BrainlyAPI {
 
     params.first = params.first ?? DEFAULT_QUESTIONS_PER_REQUEST
 
-    if (params.first > MAX_QUESTIONS_PER_REQUEST)
-      throw new Error('Parameter \'First\' can\'t be longer than 100')
+    params.first = parseInt(params.first)
+
+    if (isNaN(params.first))
+      throw new Error('Parameter \'First\' must be a Number')
+
+    if (params.first < MIN_QUESTIONS_PER_REQUEST || params.first > MAX_QUESTIONS_PER_REQUEST)
+      throw new Error('Parameter \'First\' must be between 1 and 100')
 
     return await this._request({ action: 'search', params })
   }
