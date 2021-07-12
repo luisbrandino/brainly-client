@@ -1,6 +1,5 @@
-module.exports = `query SearchQuery($query: String!, $first: Int!, $after: ID) {
+query SearchQuery($query: String!, $first: Int!, $after: ID) {
   questionSearch(query: $query, first: $first, after: $after) {
-    count
     edges {
       node {
         id
@@ -8,11 +7,15 @@ module.exports = `query SearchQuery($query: String!, $first: Int!, $after: ID) {
           id
           isDeleted
           nick
+          points
+          created
+          bestAnswersCount
           avatar {
             thumbnailUrl
           }
           rank {
             name
+            description
           }
         }
         content
@@ -26,21 +29,21 @@ module.exports = `query SearchQuery($query: String!, $first: Int!, $after: ID) {
               id
               isDeleted
               nick
+              points
+              created
+              bestAnswersCount
               avatar {
                 thumbnailUrl
               }
               rank {
                 name
+                description
               }
             }
           }
           hasVerified
         }
       }
-      highlight {
-        contentFragments
-      }
     }
   }
 }
-`

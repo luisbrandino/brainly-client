@@ -60,7 +60,21 @@ describe('Testing method search', () => {
     expect(results.length).toBe(10)
   })
 
-  it('Should throw an error when parameter \'First\' is longer than 100', async () => {
-    expect(async () => await client.search({ query: 'Test', first: 150 }).rejects.toThrow('Parameter \'First\' can\'t be longer than 100'))
+  it('Should try to parse parameter \'first\' to an integer', async () => {
+    const results = await client.search({ query: 'Test', first: '10' })
+
+    expect(results.length <= 10).toBe(true)
+  })
+
+  it('Should throw an error when parameter \'first\' is not a number', async () => {
+    expect(async () => await client.search({ query: 'Test', first: 'abc' }).rejects.toThrow('Parameter \'first\' must be a Number'))
+  })
+
+  it('Should throw an error when parameter \'first\' is longer than 100', async () => {
+    expect(async () => await client.search({ query: 'Test', first: 150 }).rejects.toThrow('Parameter \'first\' must be between 1 and 100'))
+  })
+
+  it('Should throw an error when parameter \'first\' is less than 1', async () => {
+    expect(async () => await client.search({ query: 'Test', first: 0 })).rejects.toThrow('Parameter \'first\' must be between 1 and 100')
   })
 })

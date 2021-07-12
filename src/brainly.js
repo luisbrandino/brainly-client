@@ -1,7 +1,7 @@
 const servers = require('./servers')
 const { DEFAULT_QUESTIONS_PER_REQUEST, MAX_QUESTIONS_PER_REQUEST, MIN_QUESTIONS_PER_REQUEST } = require('./constants')
 
-class BrainlyAPI {
+class Client {
   config = {
     server: servers.DEFAULT
   }
@@ -23,14 +23,21 @@ class BrainlyAPI {
     }
 
     params.first = params.first ?? DEFAULT_QUESTIONS_PER_REQUEST
-
     params.first = parseInt(params.first)
 
     if (isNaN(params.first))
-      throw new Error('Parameter \'First\' must be a Number')
+      throw new Error('Parameter \'first\' must be a Number')
 
     if (params.first < MIN_QUESTIONS_PER_REQUEST || params.first > MAX_QUESTIONS_PER_REQUEST)
-      throw new Error('Parameter \'First\' must be between 1 and 100')
+      throw new Error('Parameter \'first\' must be between 1 and 100')
+
+    params.after = parseInt(params.after)
+
+    if (isNaN(params.after) || params.after < 1)
+      params.after = null
+
+    if (params.after) 
+      params.after = Buffer.from(`cursor:${params.after}`).toString('base64')
 
     return await this._request({ action: 'search', params })
   }
@@ -41,10 +48,8 @@ class BrainlyAPI {
     if (typeof action !== 'function')
       throw new Error('Invalid action')
 
-    params.server = this.config.server
-
-    return await action(params)
+    return await action(this, params)
   }
 }
 
-module.exports = BrainlyAPI
+module.exports = Client
