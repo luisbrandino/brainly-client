@@ -5,7 +5,7 @@ class BasePayload {
     if (this._query)
       return this._query
 
-    this._query = readFileSync(`${process.cwd()}/src/queries/${this.operation}.graphql`).toString('utf-8')
+    this._query = require('../queries/SearchQuery')
     return this._query
   }
 }

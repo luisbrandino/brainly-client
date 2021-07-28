@@ -1,4 +1,4 @@
-query SearchQuery($query: String!, $first: Int!, $after: ID) {
+module.exports = `query SearchQuery($query: String!, $first: Int!, $after: ID) {
   questionSearch(query: $query, first: $first, after: $after) {
     edges {
       node {
@@ -46,4 +46,4 @@ query SearchQuery($query: String!, $first: Int!, $after: ID) {
       }
     }
   }
-}
+}`
